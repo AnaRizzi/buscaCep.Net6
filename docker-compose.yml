@@ -1,0 +1,21 @@
+version: '1'
+
+services:
+  buscacep:
+    build: .
+    ports:
+      - "5299:80"
+    networks:
+      - cep
+    depends_on:
+      - "rediscep"
+  rediscep:
+    image: "redis"
+    ports:
+      - "16379:6379"
+    networks:
+      - cep
+
+networks:
+  cep:
+    driver: bridge
